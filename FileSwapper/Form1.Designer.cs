@@ -39,6 +39,7 @@
             this.btnKeepFile = new System.Windows.Forms.Button();
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.gbxSwap.SuspendLayout();
             this.tabcFileViewer.SuspendLayout();
             this.tabpImages.SuspendLayout();
@@ -47,9 +48,10 @@
             // 
             // tbxSearchFolder
             // 
-            this.tbxSearchFolder.Location = new System.Drawing.Point(13, 13);
+            this.tbxSearchFolder.Location = new System.Drawing.Point(17, 16);
+            this.tbxSearchFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbxSearchFolder.Name = "tbxSearchFolder";
-            this.tbxSearchFolder.Size = new System.Drawing.Size(971, 20);
+            this.tbxSearchFolder.Size = new System.Drawing.Size(1293, 22);
             this.tbxSearchFolder.TabIndex = 0;
             // 
             // gbxSwap
@@ -58,9 +60,11 @@
             this.gbxSwap.Controls.Add(this.button1);
             this.gbxSwap.Controls.Add(this.btnKeepFile);
             this.gbxSwap.Controls.Add(this.btnDeleteFile);
-            this.gbxSwap.Location = new System.Drawing.Point(12, 39);
+            this.gbxSwap.Location = new System.Drawing.Point(16, 48);
+            this.gbxSwap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbxSwap.Name = "gbxSwap";
-            this.gbxSwap.Size = new System.Drawing.Size(1055, 565);
+            this.gbxSwap.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxSwap.Size = new System.Drawing.Size(1407, 695);
             this.gbxSwap.TabIndex = 2;
             this.gbxSwap.TabStop = false;
             this.gbxSwap.Text = "Swap";
@@ -70,83 +74,92 @@
             this.tabcFileViewer.Controls.Add(this.tabpImages);
             this.tabcFileViewer.Controls.Add(this.tabpVideos);
             this.tabcFileViewer.Controls.Add(this.tabPage1);
-            this.tabcFileViewer.Location = new System.Drawing.Point(169, 20);
+            this.tabcFileViewer.Location = new System.Drawing.Point(225, 25);
+            this.tabcFileViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabcFileViewer.Name = "tabcFileViewer";
             this.tabcFileViewer.SelectedIndex = 0;
-            this.tabcFileViewer.Size = new System.Drawing.Size(729, 498);
+            this.tabcFileViewer.Size = new System.Drawing.Size(972, 613);
             this.tabcFileViewer.TabIndex = 3;
             // 
             // tabpImages
             // 
             this.tabpImages.Controls.Add(this.pboxImage);
-            this.tabpImages.Location = new System.Drawing.Point(4, 22);
+            this.tabpImages.Location = new System.Drawing.Point(4, 25);
+            this.tabpImages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabpImages.Name = "tabpImages";
-            this.tabpImages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpImages.Size = new System.Drawing.Size(721, 472);
+            this.tabpImages.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabpImages.Size = new System.Drawing.Size(964, 584);
             this.tabpImages.TabIndex = 0;
             this.tabpImages.Text = "Images";
             this.tabpImages.UseVisualStyleBackColor = true;
             // 
             // pboxImage
             // 
-            this.pboxImage.Location = new System.Drawing.Point(7, 7);
+            this.pboxImage.Location = new System.Drawing.Point(9, 9);
+            this.pboxImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pboxImage.Name = "pboxImage";
-            this.pboxImage.Size = new System.Drawing.Size(708, 459);
+            this.pboxImage.Size = new System.Drawing.Size(944, 565);
             this.pboxImage.TabIndex = 0;
             this.pboxImage.TabStop = false;
             // 
             // tabpVideos
             // 
-            this.tabpVideos.Location = new System.Drawing.Point(4, 22);
+            this.tabpVideos.Location = new System.Drawing.Point(4, 25);
+            this.tabpVideos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabpVideos.Name = "tabpVideos";
-            this.tabpVideos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpVideos.Size = new System.Drawing.Size(721, 472);
+            this.tabpVideos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabpVideos.Size = new System.Drawing.Size(964, 584);
             this.tabpVideos.TabIndex = 1;
             this.tabpVideos.Text = "Videos";
             this.tabpVideos.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(721, 472);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(964, 584);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(456, 524);
+            this.button1.Location = new System.Drawing.Point(608, 645);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
+            this.button1.Size = new System.Drawing.Size(160, 28);
             this.button1.TabIndex = 2;
             this.button1.Text = "Go back";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // btnKeepFile
             // 
-            this.btnKeepFile.Location = new System.Drawing.Point(904, 19);
+            this.btnKeepFile.Location = new System.Drawing.Point(1205, 23);
+            this.btnKeepFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnKeepFile.Name = "btnKeepFile";
-            this.btnKeepFile.Size = new System.Drawing.Size(145, 528);
+            this.btnKeepFile.Size = new System.Drawing.Size(193, 650);
             this.btnKeepFile.TabIndex = 1;
             this.btnKeepFile.Text = "Keep";
             this.btnKeepFile.UseVisualStyleBackColor = true;
             // 
             // btnDeleteFile
             // 
-            this.btnDeleteFile.Location = new System.Drawing.Point(6, 19);
+            this.btnDeleteFile.Location = new System.Drawing.Point(8, 23);
+            this.btnDeleteFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDeleteFile.Name = "btnDeleteFile";
-            this.btnDeleteFile.Size = new System.Drawing.Size(145, 528);
+            this.btnDeleteFile.Size = new System.Drawing.Size(193, 650);
             this.btnDeleteFile.TabIndex = 0;
             this.btnDeleteFile.Text = "Delete";
             this.btnDeleteFile.UseVisualStyleBackColor = true;
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(986, 13);
+            this.btnBrowse.Location = new System.Drawing.Point(1315, 16);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(81, 20);
+            this.btnBrowse.Size = new System.Drawing.Size(108, 25);
             this.btnBrowse.TabIndex = 3;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -154,12 +167,13 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1079, 616);
+            this.ClientSize = new System.Drawing.Size(1439, 758);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.gbxSwap);
             this.Controls.Add(this.tbxSearchFolder);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "FileSwapper";
             this.gbxSwap.ResumeLayout(false);
@@ -184,6 +198,7 @@
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.PictureBox pboxImage;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
 

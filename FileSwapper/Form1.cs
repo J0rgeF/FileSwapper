@@ -25,18 +25,52 @@ namespace FileSwapper
         {
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                DialogResult result = folderBrowserDialog.ShowDialog();
+                folderBrowserDialog.Description = "Selecione um directório para listar os ficheiros";
+                folderBrowserDialog.ShowNewFolderButton = false;
 
-                if (result == DialogResult.OK)
+                if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    CurrentPath = folderBrowserDialog.SelectedPath;
-                }
-                else
-                {
-                    MessageBox.Show("No folder selected.");
+                    string selectedPath = folderBrowserDialog.SelectedPath;
+
+                    var imageInfoList = GetFilesInfo(selectedPath);
+
                 }
             }
         }
 
+        static List<FileDetails> GetFilesInfo(string path)
+        {
+            var imageExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp"
+            };
+
+            var files = Directory.GetFiles(path)
+                .Where(file => imageExtensions.Contains(Path.GetExtension(file)));
+
+            var fileDetailsList = new List<FileDetails>();
+
+            foreach(var file in files)
+            {
+                var fileInfo = new FileInfo(file);
+                fileDetailsList.Add(new FileDetails
+                {
+                    FullPath = fileInfo.FullName,
+                    FileName = fileInfo.Name,
+                    Extension = fileInfo.Extension,
+                    Size = fileInfo.Length
+                });
+            }
+
+            return fileDetailsList;
+        }
+
+        class FileDetails
+        {
+            public string FullPath { get; set; }
+            public string FileName { get; set; }
+            public string Extension { get; set; }
+            public long Size { get; set; }
+        }
     }
 }
