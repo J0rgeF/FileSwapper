@@ -16,9 +16,12 @@ namespace FileSwapper
     {
         public string CurrentFilePath = "";
         public string CurrentPath = "";
+        private List<FileDetails> imageInfoList;
+        private int currentImageIndex = 0; 
         public Form1()
         {
             InitializeComponent();
+            imageInfoList = new List<FileDetails>();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -33,6 +36,17 @@ namespace FileSwapper
                     string selectedPath = folderBrowserDialog.SelectedPath;
 
                     var imageInfoList = GetFilesInfo(selectedPath);
+
+                    this.imageInfoList = imageInfoList;
+
+                    if (imageInfoList.Count > 0)
+                    {
+                        ShowCurrentImage();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nenhuma imagem encontrada no diretório selecionado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
 
                 }
             }
@@ -65,12 +79,69 @@ namespace FileSwapper
             return fileDetailsList;
         }
 
-        class FileDetails
+        private void btnKeepFile_Click(object sender, EventArgs e)
         {
-            public string FullPath { get; set; }
-            public string FileName { get; set; }
-            public string Extension { get; set; }
-            public long Size { get; set; }
+            MoveToNextImage();
+        }
+
+        private void MoveToNextImage()
+        {
+            if(currentImageIndex < imageInfoList.Count - 1)
+            {
+                currentImageIndex++;
+                ShowCurrentImage();
+            }
+            else
+            {
+                MessageBox.Show("Todas as imagens foram processadas!", "Concluído", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                pboxImage.Image = null; // Limpa o PictureBox
+            }
+        }
+
+        private void ShowCurrentImage()
+        {
+            if (currentImageIndex >= 0 && currentImageIndex < imageInfoList.Count)
+            {
+                var currentImage = imageInfoList[currentImageIndex];
+
+                if (File.Exists(currentImage.FullPath)) // Verifica se o ficheiro ainda existe
+                {
+                    pboxImage.ImageLocation = currentImage.FullPath; // Atualiza a imagem no PictureBox
+                }
+                else
+                {
+                    MessageBox.Show("A imagem não existe mais ou não foi encontrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MoveToNextImage(); // Passa para a próxima imagem se a atual não existir.
+                }
+            }
+            else
+            {
+                MessageBox.Show("Índice fora do intervalo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDeleteFile_Click(object sender, EventArgs e)
+        {
+            if(imageInfoList.Count > 0 && currentImageIndex >= 0 && currentImageIndex < imageInfoList.Count)
+            {
+                var currentImage = imageInfoList[currentImageIndex];
+
+                try
+                {
+                    File.Delete(currentImage.FullPath);
+                    imageInfoList.RemoveAt(currentImageIndex);
+                    MessageBox.Show("Imagem apagada com sucesso.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MoveToNextImage();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show($"Erro ao apagar a imagem: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MoveToNextImage();
+            }
         }
     }
 }
