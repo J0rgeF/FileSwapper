@@ -135,6 +135,7 @@
             this.btnGoBack.TabIndex = 2;
             this.btnGoBack.Text = "Go back";
             this.btnGoBack.UseVisualStyleBackColor = true;
+            this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
             // 
             // btnKeepFile
             // 

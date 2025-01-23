@@ -103,13 +103,40 @@ namespace FileSwapper
             return false;
         }
 
+        public bool GoToPreviousImage()
+        {
+            // TODO: if the last image was deleted restore it using Shell32 to access the recycle bin
+            if (FileIndex - 1 >= 0)
+            {
+                FileIndex--;
+                lblCountFiles.Text = $"{FileIndex + 1}/{Files.Count}";
+                string currentDirectory = Directory.GetCurrentDirectory();
+                string htmlFilePath = Path.Combine(currentDirectory, "ShowImage.html");
+                string imagePath = Files[FileIndex].FullPath;
+                UriBuilder uriBuilder = new UriBuilder
+                {
+                    Scheme = "file",
+                    Path = htmlFilePath,
+                    Query = $"path={Uri.EscapeDataString(imagePath)}"
+                };
+                wbwImage.Url = uriBuilder.Uri;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("No more images to go back to in this folder");
+            }
+
+            return false;
+        }
+
         public bool BuildImageViewer()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
 
             try
             {
-                File.WriteAllText(Path.Combine(currentDirectory, "ShowImage.html"), "<!DOCTYPE html><html lang=\"en\"><head> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Image Viewer</title> <style> #viewImage { max-width: 400px; height: auto; } </style> <script> window.onload = function () { var queryString = window.location.search; var path = null; if (queryString) { var params = queryString.substring(1).split(\"&\"); for (var i = 0; i < params.length; i++) { var pair = params[i].split(\"=\"); if (pair[0] === \"path\") { path = decodeURIComponent(pair[1]); break; } } } var viewImage = document.getElementById(\"viewImage\"); if (viewImage && path) { viewImage.src = path; } }; </script></head><body> <center> <img id=\"viewImage\" src=\"\" alt=\"Image will appear here\" /> </center></body></html>");
+                File.WriteAllText(Path.Combine(currentDirectory, "ShowImage.html"), "<!DOCTYPE html><html lang=\"en\"><head> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Image Viewer</title> <style> #viewImage { width: 500px; max-height: 400px; } </style> <script> window.onload = function () { var queryString = window.location.search; var path = null; if (queryString) { var params = queryString.substring(1).split(\"&\"); for (var i = 0; i < params.length; i++) { var pair = params[i].split(\"=\"); if (pair[0] === \"path\") { path = decodeURIComponent(pair[1]); break; } } } var viewImage = document.getElementById(\"viewImage\"); if (viewImage && path) { viewImage.src = path; } }; </script></head><body> <center> <img id=\"viewImage\" src=\"\" alt=\"Image will appear here\" /> </center></body></html>");
             }
             catch (Exception ex)
             {
@@ -133,6 +160,11 @@ namespace FileSwapper
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
+        }
+
+        private void btnGoBack_Click(object sender, EventArgs e)
+        {
+            GoToPreviousImage();
         }
     }
 }
