@@ -32,18 +32,17 @@
             this.gbxSwap = new System.Windows.Forms.GroupBox();
             this.tabcFileViewer = new System.Windows.Forms.TabControl();
             this.tabpImages = new System.Windows.Forms.TabPage();
-            this.pboxImage = new System.Windows.Forms.PictureBox();
+            this.lblCountFiles = new System.Windows.Forms.Label();
             this.tabpVideos = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnGoBack = new System.Windows.Forms.Button();
             this.btnKeepFile = new System.Windows.Forms.Button();
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.wbwImage = new System.Windows.Forms.WebBrowser();
             this.gbxSwap.SuspendLayout();
             this.tabcFileViewer.SuspendLayout();
             this.tabpImages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tbxSearchFolder
@@ -80,8 +79,8 @@
             // 
             // tabpImages
             // 
-            this.tabpImages.Controls.Add(this.label1);
-            this.tabpImages.Controls.Add(this.pboxImage);
+            this.tabpImages.Controls.Add(this.wbwImage);
+            this.tabpImages.Controls.Add(this.lblCountFiles);
             this.tabpImages.Location = new System.Drawing.Point(4, 22);
             this.tabpImages.Name = "tabpImages";
             this.tabpImages.Padding = new System.Windows.Forms.Padding(3);
@@ -90,13 +89,14 @@
             this.tabpImages.Text = "Images";
             this.tabpImages.UseVisualStyleBackColor = true;
             // 
-            // pboxImage
+            // lblCountFiles
             // 
-            this.pboxImage.Location = new System.Drawing.Point(7, 24);
-            this.pboxImage.Name = "pboxImage";
-            this.pboxImage.Size = new System.Drawing.Size(708, 442);
-            this.pboxImage.TabIndex = 0;
-            this.pboxImage.TabStop = false;
+            this.lblCountFiles.AutoSize = true;
+            this.lblCountFiles.Location = new System.Drawing.Point(691, 3);
+            this.lblCountFiles.Name = "lblCountFiles";
+            this.lblCountFiles.Size = new System.Drawing.Size(24, 13);
+            this.lblCountFiles.TabIndex = 1;
+            this.lblCountFiles.Text = "0/0";
             // 
             // tabpVideos
             // 
@@ -135,6 +135,7 @@
             this.btnKeepFile.TabIndex = 1;
             this.btnKeepFile.Text = "Keep";
             this.btnKeepFile.UseVisualStyleBackColor = true;
+            this.btnKeepFile.Click += new System.EventHandler(this.btnKeepFile_Click);
             // 
             // btnDeleteFile
             // 
@@ -155,14 +156,14 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // label1
+            // wbwImage
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(691, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(24, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "0/0";
+            this.wbwImage.Location = new System.Drawing.Point(7, 18);
+            this.wbwImage.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbwImage.Name = "wbwImage";
+            this.wbwImage.ScrollBarsEnabled = false;
+            this.wbwImage.Size = new System.Drawing.Size(708, 448);
+            this.wbwImage.TabIndex = 2;
             // 
             // Form1
             // 
@@ -178,7 +179,6 @@
             this.tabcFileViewer.ResumeLayout(false);
             this.tabpImages.ResumeLayout(false);
             this.tabpImages.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,9 +195,9 @@
         private System.Windows.Forms.TabPage tabpImages;
         private System.Windows.Forms.TabPage tabpVideos;
         private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.PictureBox pboxImage;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCountFiles;
+        private System.Windows.Forms.WebBrowser wbwImage;
     }
 }
 

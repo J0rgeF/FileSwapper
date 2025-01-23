@@ -16,6 +16,8 @@ namespace FileSwapper
     {
         public string CurrentFilePath = "";
         public string CurrentPath = "";
+        public List<FileDetails> Files;
+        public int FileIndex = -1;
         public Form1()
         {
             InitializeComponent();
@@ -32,8 +34,9 @@ namespace FileSwapper
                 {
                     string selectedPath = folderBrowserDialog.SelectedPath;
 
-                    var imageInfoList = GetFilesInfo(selectedPath);
+                    Files = GetFilesInfo(selectedPath);
 
+                    GoToNextImage();
                 }
             }
         }
@@ -65,12 +68,45 @@ namespace FileSwapper
             return fileDetailsList;
         }
 
-        class FileDetails
+        public class FileDetails
         {
             public string FullPath { get; set; }
             public string FileName { get; set; }
             public string Extension { get; set; }
             public long Size { get; set; }
+        }
+
+        private void btnKeepFile_Click(object sender, EventArgs e)
+        {
+            GoToNextImage();
+
+        }
+
+        public bool GoToNextImage()
+        {
+            if (FileIndex + 1 < Files.Count)
+            {
+                FileIndex++;
+                lblCountFiles.Text = $"{FileIndex + 1}/{Files.Count}";
+                string currentDirectory = Directory.GetCurrentDirectory();
+                string htmlFilePath = Path.Combine(currentDirectory, "ShowImage.html");
+                string imagePath = Files[FileIndex].FullPath;
+                UriBuilder uriBuilder = new UriBuilder
+                {
+                    Scheme = "file",
+                    Path = htmlFilePath,
+                    Query = $"path={Uri.EscapeDataString(imagePath)}"
+                };
+                wbwImage.Url = uriBuilder.Uri;
+                Debug.WriteLine(wbwImage.Url);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Não existem mais imagens neste directório!");
+            }
+
+            return false;
         }
     }
 }
