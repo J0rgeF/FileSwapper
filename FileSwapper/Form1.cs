@@ -14,7 +14,7 @@ namespace FileSwapper
 {
     public partial class Form1 : Form
     {
-        public string CurrentFilePath = "";
+        public FileInfo CurrentFile;
         public string CurrentPath = "";
         public Form1()
         {
@@ -25,11 +25,10 @@ namespace FileSwapper
         {
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                DialogResult result = folderBrowserDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     CurrentPath = folderBrowserDialog.SelectedPath;
+                    tbxSearchFolder.Text = folderBrowserDialog.SelectedPath;
                 }
                 else
                 {
@@ -38,5 +37,20 @@ namespace FileSwapper
             }
         }
 
+        private void btnDeleteFile_Click(object sender, EventArgs e)
+        {
+            File.Delete(CurrentFile.FullName);
+        }
+
+        private void btnKeepFile_Click(object sender, EventArgs e)
+        {
+            // Skip for next file
+
+        }
+
+        private void btnGoBack_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

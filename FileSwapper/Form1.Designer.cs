@@ -35,10 +35,11 @@
             this.pboxImage = new System.Windows.Forms.PictureBox();
             this.tabpVideos = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGoBack = new System.Windows.Forms.Button();
             this.btnKeepFile = new System.Windows.Forms.Button();
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbxSwap.SuspendLayout();
             this.tabcFileViewer.SuspendLayout();
             this.tabpImages.SuspendLayout();
@@ -49,13 +50,14 @@
             // 
             this.tbxSearchFolder.Location = new System.Drawing.Point(13, 13);
             this.tbxSearchFolder.Name = "tbxSearchFolder";
+            this.tbxSearchFolder.ReadOnly = true;
             this.tbxSearchFolder.Size = new System.Drawing.Size(971, 20);
             this.tbxSearchFolder.TabIndex = 0;
             // 
             // gbxSwap
             // 
             this.gbxSwap.Controls.Add(this.tabcFileViewer);
-            this.gbxSwap.Controls.Add(this.button1);
+            this.gbxSwap.Controls.Add(this.btnGoBack);
             this.gbxSwap.Controls.Add(this.btnKeepFile);
             this.gbxSwap.Controls.Add(this.btnDeleteFile);
             this.gbxSwap.Location = new System.Drawing.Point(12, 39);
@@ -78,6 +80,7 @@
             // 
             // tabpImages
             // 
+            this.tabpImages.Controls.Add(this.label1);
             this.tabpImages.Controls.Add(this.pboxImage);
             this.tabpImages.Location = new System.Drawing.Point(4, 22);
             this.tabpImages.Name = "tabpImages";
@@ -89,9 +92,9 @@
             // 
             // pboxImage
             // 
-            this.pboxImage.Location = new System.Drawing.Point(7, 7);
+            this.pboxImage.Location = new System.Drawing.Point(7, 24);
             this.pboxImage.Name = "pboxImage";
-            this.pboxImage.Size = new System.Drawing.Size(708, 459);
+            this.pboxImage.Size = new System.Drawing.Size(708, 442);
             this.pboxImage.TabIndex = 0;
             this.pboxImage.TabStop = false;
             // 
@@ -115,14 +118,15 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnGoBack
             // 
-            this.button1.Location = new System.Drawing.Point(456, 524);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Go back";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGoBack.Location = new System.Drawing.Point(456, 524);
+            this.btnGoBack.Name = "btnGoBack";
+            this.btnGoBack.Size = new System.Drawing.Size(120, 23);
+            this.btnGoBack.TabIndex = 2;
+            this.btnGoBack.Text = "Go back";
+            this.btnGoBack.UseVisualStyleBackColor = true;
+            this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
             // 
             // btnKeepFile
             // 
@@ -132,6 +136,7 @@
             this.btnKeepFile.TabIndex = 1;
             this.btnKeepFile.Text = "Keep";
             this.btnKeepFile.UseVisualStyleBackColor = true;
+            this.btnKeepFile.Click += new System.EventHandler(this.btnKeepFile_Click);
             // 
             // btnDeleteFile
             // 
@@ -141,6 +146,7 @@
             this.btnDeleteFile.TabIndex = 0;
             this.btnDeleteFile.Text = "Delete";
             this.btnDeleteFile.UseVisualStyleBackColor = true;
+            this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
             // 
             // btnBrowse
             // 
@@ -151,6 +157,15 @@
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(691, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "0/0";
             // 
             // Form1
             // 
@@ -165,6 +180,7 @@
             this.gbxSwap.ResumeLayout(false);
             this.tabcFileViewer.ResumeLayout(false);
             this.tabpImages.ResumeLayout(false);
+            this.tabpImages.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -177,13 +193,14 @@
         private System.Windows.Forms.GroupBox gbxSwap;
         private System.Windows.Forms.Button btnKeepFile;
         private System.Windows.Forms.Button btnDeleteFile;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGoBack;
         private System.Windows.Forms.TabControl tabcFileViewer;
         private System.Windows.Forms.TabPage tabpImages;
         private System.Windows.Forms.TabPage tabpVideos;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.PictureBox pboxImage;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
