@@ -14,7 +14,7 @@ namespace FileSwapper
 {
     public partial class Form1 : Form
     {
-        public FileInfo CurrentFile;
+        public string CurrentFilePath = "";
         public string CurrentPath = "";
         public Form1()
         {
@@ -25,32 +25,52 @@ namespace FileSwapper
         {
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                folderBrowserDialog.Description = "Selecione um directório para listar os ficheiros";
+                folderBrowserDialog.ShowNewFolderButton = false;
+
+                if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    CurrentPath = folderBrowserDialog.SelectedPath;
-                    tbxSearchFolder.Text = folderBrowserDialog.SelectedPath;
-                }
-                else
-                {
-                    MessageBox.Show("No folder selected.");
+                    string selectedPath = folderBrowserDialog.SelectedPath;
+
+                    var imageInfoList = GetFilesInfo(selectedPath);
+
                 }
             }
         }
 
-        private void btnDeleteFile_Click(object sender, EventArgs e)
+        static List<FileDetails> GetFilesInfo(string path)
         {
-            File.Delete(CurrentFile.FullName);
+            var imageExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp"
+            };
+
+            var files = Directory.GetFiles(path)
+                .Where(file => imageExtensions.Contains(Path.GetExtension(file)));
+
+            var fileDetailsList = new List<FileDetails>();
+
+            foreach(var file in files)
+            {
+                var fileInfo = new FileInfo(file);
+                fileDetailsList.Add(new FileDetails
+                {
+                    FullPath = fileInfo.FullName,
+                    FileName = fileInfo.Name,
+                    Extension = fileInfo.Extension,
+                    Size = fileInfo.Length
+                });
+            }
+
+            return fileDetailsList;
         }
 
-        private void btnKeepFile_Click(object sender, EventArgs e)
+        class FileDetails
         {
-            // Skip for next file
-
-        }
-
-        private void btnGoBack_Click(object sender, EventArgs e)
-        {
-
+            public string FullPath { get; set; }
+            public string FileName { get; set; }
+            public string Extension { get; set; }
+            public long Size { get; set; }
         }
     }
 }
