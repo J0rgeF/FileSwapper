@@ -126,7 +126,6 @@
             this.btnGoBack.TabIndex = 2;
             this.btnGoBack.Text = "Go back";
             this.btnGoBack.UseVisualStyleBackColor = true;
-            this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
             // 
             // btnKeepFile
             // 
@@ -136,7 +135,6 @@
             this.btnKeepFile.TabIndex = 1;
             this.btnKeepFile.Text = "Keep";
             this.btnKeepFile.UseVisualStyleBackColor = true;
-            this.btnKeepFile.Click += new System.EventHandler(this.btnKeepFile_Click);
             // 
             // btnDeleteFile
             // 
@@ -146,7 +144,6 @@
             this.btnDeleteFile.TabIndex = 0;
             this.btnDeleteFile.Text = "Delete";
             this.btnDeleteFile.UseVisualStyleBackColor = true;
-            this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
             // 
             // btnBrowse
             // 
