@@ -154,6 +154,7 @@
             this.btnDeleteFile.TabIndex = 0;
             this.btnDeleteFile.Text = "Delete";
             this.btnDeleteFile.UseVisualStyleBackColor = true;
+            this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
             // 
             // btnBrowse
             // 

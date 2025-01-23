@@ -9,12 +9,13 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Microsoft.VisualBasic.FileIO;
+
 
 namespace FileSwapper
 {
     public partial class Form1 : Form
     {
-        public string CurrentFilePath = "";
         public string CurrentPath = "";
         public List<FileDetails> Files;
         public int FileIndex = -1;
@@ -27,7 +28,7 @@ namespace FileSwapper
         {
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                folderBrowserDialog.Description = "Selecione um directório para listar os ficheiros";
+                folderBrowserDialog.Description = "Select a folder";
                 folderBrowserDialog.ShowNewFolderButton = false;
 
                 if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
@@ -68,13 +69,7 @@ namespace FileSwapper
             return fileDetailsList;
         }
 
-        public class FileDetails
-        {
-            public string FullPath { get; set; }
-            public string FileName { get; set; }
-            public string Extension { get; set; }
-            public long Size { get; set; }
-        }
+
 
         private void btnKeepFile_Click(object sender, EventArgs e)
         {
@@ -102,7 +97,7 @@ namespace FileSwapper
             }
             else
             {
-                MessageBox.Show("Não existem mais imagens neste directório!");
+                MessageBox.Show("No more images in this folder");
             }
 
             return false;
@@ -118,7 +113,7 @@ namespace FileSwapper
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
             return true;
         }
@@ -126,6 +121,18 @@ namespace FileSwapper
         private void Form1_Load(object sender, EventArgs e)
         {
             BuildImageViewer();
+        }
+
+        private void btnDeleteFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FileSystem.DeleteFile(Files[FileIndex].FullPath,UIOption.OnlyErrorDialogs,RecycleOption.SendToRecycleBin);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
         }
     }
 }
