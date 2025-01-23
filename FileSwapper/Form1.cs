@@ -17,7 +17,7 @@ namespace FileSwapper
     public partial class Form1 : Form
     {
         public string CurrentPath = "";
-        public List<FileDetails> Files;
+        public List<FileInfo> Files;
         public int FileIndex = -1;
         public Form1()
         {
@@ -42,7 +42,7 @@ namespace FileSwapper
             }
         }
 
-        static List<FileDetails> GetFilesInfo(string path)
+        static List<FileInfo> GetFilesInfo(string path)
         {
             var imageExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
@@ -52,24 +52,15 @@ namespace FileSwapper
             var files = Directory.GetFiles(path)
                 .Where(file => imageExtensions.Contains(Path.GetExtension(file)));
 
-            var fileDetailsList = new List<FileDetails>();
+            var fileDetailsList = new List<FileInfo>();
 
             foreach(var file in files)
             {
-                var fileInfo = new FileInfo(file);
-                fileDetailsList.Add(new FileDetails
-                {
-                    FullPath = fileInfo.FullName,
-                    FileName = fileInfo.Name,
-                    Extension = fileInfo.Extension,
-                    Size = fileInfo.Length
-                });
+                fileDetailsList.Add(new FileInfo(file));
             }
 
             return fileDetailsList;
         }
-
-
 
         private void btnKeepFile_Click(object sender, EventArgs e)
         {
@@ -85,7 +76,7 @@ namespace FileSwapper
                 lblCountFiles.Text = $"{FileIndex + 1}/{Files.Count}";
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string htmlFilePath = Path.Combine(currentDirectory, "ShowImage.html");
-                string imagePath = Files[FileIndex].FullPath;
+                string imagePath = Files[FileIndex].FullName;
                 UriBuilder uriBuilder = new UriBuilder
                 {
                     Scheme = "file",
@@ -112,7 +103,7 @@ namespace FileSwapper
                 lblCountFiles.Text = $"{FileIndex + 1}/{Files.Count}";
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string htmlFilePath = Path.Combine(currentDirectory, "ShowImage.html");
-                string imagePath = Files[FileIndex].FullPath;
+                string imagePath = Files[FileIndex].FullName;
                 UriBuilder uriBuilder = new UriBuilder
                 {
                     Scheme = "file",
@@ -154,7 +145,7 @@ namespace FileSwapper
         {
             try
             {
-                FileSystem.DeleteFile(Files[FileIndex].FullPath,UIOption.OnlyErrorDialogs,RecycleOption.SendToRecycleBin);
+                FileSystem.DeleteFile(Files[FileIndex].FullName,UIOption.OnlyErrorDialogs,RecycleOption.SendToRecycleBin);
             }
             catch (Exception ex)
             {
