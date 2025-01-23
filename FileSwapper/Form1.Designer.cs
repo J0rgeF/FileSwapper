@@ -32,6 +32,7 @@
             this.gbxSwap = new System.Windows.Forms.GroupBox();
             this.tabcFileViewer = new System.Windows.Forms.TabControl();
             this.tabpImages = new System.Windows.Forms.TabPage();
+            this.wbwImage = new System.Windows.Forms.WebBrowser();
             this.lblCountFiles = new System.Windows.Forms.Label();
             this.tabpVideos = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -39,7 +40,6 @@
             this.btnKeepFile = new System.Windows.Forms.Button();
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.wbwImage = new System.Windows.Forms.WebBrowser();
             this.gbxSwap.SuspendLayout();
             this.tabcFileViewer.SuspendLayout();
             this.tabpImages.SuspendLayout();
@@ -88,6 +88,15 @@
             this.tabpImages.TabIndex = 0;
             this.tabpImages.Text = "Images";
             this.tabpImages.UseVisualStyleBackColor = true;
+            // 
+            // wbwImage
+            // 
+            this.wbwImage.Location = new System.Drawing.Point(7, 18);
+            this.wbwImage.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbwImage.Name = "wbwImage";
+            this.wbwImage.ScrollBarsEnabled = false;
+            this.wbwImage.Size = new System.Drawing.Size(708, 448);
+            this.wbwImage.TabIndex = 2;
             // 
             // lblCountFiles
             // 
@@ -156,15 +165,6 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // wbwImage
-            // 
-            this.wbwImage.Location = new System.Drawing.Point(7, 18);
-            this.wbwImage.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbwImage.Name = "wbwImage";
-            this.wbwImage.ScrollBarsEnabled = false;
-            this.wbwImage.Size = new System.Drawing.Size(708, 448);
-            this.wbwImage.TabIndex = 2;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,6 +175,7 @@
             this.Controls.Add(this.tbxSearchFolder);
             this.Name = "Form1";
             this.Text = "FileSwapper";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.gbxSwap.ResumeLayout(false);
             this.tabcFileViewer.ResumeLayout(false);
             this.tabpImages.ResumeLayout(false);
