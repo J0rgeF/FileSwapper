@@ -91,11 +91,13 @@
             // 
             // wbwImage
             // 
-            this.wbwImage.Location = new System.Drawing.Point(7, 18);
+            this.wbwImage.AllowWebBrowserDrop = false;
+            this.wbwImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wbwImage.Location = new System.Drawing.Point(3, 3);
             this.wbwImage.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbwImage.Name = "wbwImage";
             this.wbwImage.ScrollBarsEnabled = false;
-            this.wbwImage.Size = new System.Drawing.Size(708, 448);
+            this.wbwImage.Size = new System.Drawing.Size(715, 466);
             this.wbwImage.TabIndex = 2;
             // 
             // lblCountFiles
@@ -139,6 +141,7 @@
             // 
             // btnKeepFile
             // 
+            this.btnKeepFile.AllowDrop = true;
             this.btnKeepFile.Location = new System.Drawing.Point(904, 19);
             this.btnKeepFile.Name = "btnKeepFile";
             this.btnKeepFile.Size = new System.Drawing.Size(145, 528);
@@ -146,9 +149,13 @@
             this.btnKeepFile.Text = "Keep";
             this.btnKeepFile.UseVisualStyleBackColor = true;
             this.btnKeepFile.Click += new System.EventHandler(this.btnKeepFile_Click);
+            this.btnKeepFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.btnKeepFile_DragDrop);
+            this.btnKeepFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.btnKeepFile_DragEnter);
+            this.btnKeepFile.DragOver += new System.Windows.Forms.DragEventHandler(this.btnKeepFile_DragOver);
             // 
             // btnDeleteFile
             // 
+            this.btnDeleteFile.AllowDrop = true;
             this.btnDeleteFile.Location = new System.Drawing.Point(6, 19);
             this.btnDeleteFile.Name = "btnDeleteFile";
             this.btnDeleteFile.Size = new System.Drawing.Size(145, 528);
@@ -156,6 +163,9 @@
             this.btnDeleteFile.Text = "Delete";
             this.btnDeleteFile.UseVisualStyleBackColor = true;
             this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
+            this.btnDeleteFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.btnDeleteFile_DragDrop);
+            this.btnDeleteFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.btnDeleteFile_DragEnter);
+            this.btnDeleteFile.DragOver += new System.Windows.Forms.DragEventHandler(this.btnDeleteFile_DragOver);
             // 
             // btnBrowse
             // 
@@ -169,6 +179,7 @@
             // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1079, 616);

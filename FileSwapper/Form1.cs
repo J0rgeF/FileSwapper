@@ -33,16 +33,16 @@ namespace FileSwapper
 
                 if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string selectedPath = folderBrowserDialog.SelectedPath;
+                    tbxSearchFolder.Text = folderBrowserDialog.SelectedPath;
 
-                    Files = GetFilesInfo(selectedPath);
+                    Files = GetImagesList(folderBrowserDialog.SelectedPath);
 
                     GoToNextImage();
                 }
             }
         }
 
-        static List<FileInfo> GetFilesInfo(string path)
+        static List<FileInfo> GetImagesList(string path)
         {
             var imageExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
@@ -151,11 +151,52 @@ namespace FileSwapper
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
+
+            GoToNextImage();
         }
 
         private void btnGoBack_Click(object sender, EventArgs e)
         {
             GoToPreviousImage();
+        }
+
+        private void btnKeepFile_DragDrop(object sender, DragEventArgs e)
+        {
+            GoToNextImage();
+        }
+
+        private void btnKeepFile_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void btnKeepFile_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void btnDeleteFile_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                FileSystem.DeleteFile(Files[FileIndex].FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            GoToNextImage();
+        }
+
+        private void btnDeleteFile_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void btnDeleteFile_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
         }
     }
 }
